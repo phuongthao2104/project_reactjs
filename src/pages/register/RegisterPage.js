@@ -2,34 +2,37 @@ import React, { useState } from "react";
 import ReactLoading from "react-loading";
 import { Link, useNavigate } from "react-router-dom";
 import LoginForm from "../../features/login/LoginForm";
+import serviceCallApi from "../../services/ServiceApi";
+import { useForm } from "react-hook-form";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  const onSubmit = (data) => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = async (data) => {
     setLoading(true);
-    setTimeout(() => {
+    try {
+      await serviceCallApi("register", "POST", data);
       setLoading(false);
-      navigate("/");
-    }, 5000);
-
-    // Sau khi call Api thanh cong, back ve home, va lưu thông tin người dùng trong Localstorage
-
-    // Dùng redux toolkit dispatch Action login success => return => Locastorage
-    // Khi Logout xóa Localstorage
+      navigate("/login");
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
   };
-
   return (
     <section className="h-100">
       <div className="container h-100">
         <div className="row justify-content-sm-center h-100">
           <div className="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
-            <div className="text-center my-5">
-              <h1>Login </h1>
-            </div>
             <div className="card shadow-lg">
               <div className="card-body p-5">
+                <h1 className="fs-4 card-title fw-bold mb-4">Register</h1>
                 {loading ? (
                   <div className="text-center d-flex justify-content-center">
                     <ReactLoading
@@ -40,20 +43,96 @@ const LoginPage = () => {
                     />
                   </div>
                 ) : (
-                  <LoginForm onSubmit={onSubmit} />
+                  <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="needs-validation"
+                  >
+                    <div className="mb-3">
+                      <label className="mb-2 text-muted" htmlFor="name">
+                        Name
+                      </label>
+                      <input
+                        id="name"
+                        type="text"
+                        className="form-control"
+                        {...register("name", { required: true })}
+                        required
+                      />
+                      <div className="text-danger">
+                        {errors.name && <span>Name field is required</span>}
+                      </div>
+                    </div>
+                    <div className="mb-3">
+                      <label className="mb-2 text-muted" htmlFor="email">
+                        E-Mail Address
+                      </label>
+                      <input
+                        id="email"
+                        type="email"
+                        className="form-control"
+                        {...register("email", { required: true })}
+                        required
+                      />
+                      <div className="text-danger">
+                        {errors.name && <span>Email field is required</span>}
+                      </div>
+                    </div>
+                    <div className="mb-3">
+                      <label className="mb-2 text-muted" htmlFor="password">
+                        Password
+                      </label>
+                      <input
+                        id="password"
+                        type="password"
+                        className="form-control"
+                        {...register("password", { required: true })}
+                        required
+                      />
+                      <div className="text-danger">
+                        {errors.password && (
+                          <span>Password field is required</span>
+                        )}
+                      </div>
+                    </div>
+                    <div className="mb-3">
+                      <label className="mb-2 text-muted" htmlFor="password">
+                        Confirm Password
+                      </label>
+                      <input
+                        id="password"
+                        type="password"
+                        className="form-control"
+                        {...register("c_password", { required: true })}
+                        required
+                      />
+                      <div className="text-danger">
+                        {errors.c_password && (
+                          <span>Confirm password field is required</span>
+                        )}
+                      </div>
+                    </div>
+                    <p className="form-text text-muted mb-3">
+                      By registering you agree with our terms and condition.
+                    </p>
+                    <div className="align-items-center d-flex">
+                      <button type="submit" className="btn btn-primary ms-auto">
+                        Register
+                      </button>
+                    </div>
+                  </form>
                 )}
               </div>
               <div className="card-footer py-3 border-0">
                 <div className="text-center">
                   Already have an account?{" "}
-                  <Link to="/register" className="text-dark">
-                    Register
+                  <Link to="/login" className="text-dark">
+                    Login
                   </Link>
                 </div>
               </div>
             </div>
             <div className="text-center mt-5 text-muted">
-              Copyright © Your Company
+              Copyright ©  Your Company
             </div>
           </div>
         </div>
@@ -62,4 +141,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
