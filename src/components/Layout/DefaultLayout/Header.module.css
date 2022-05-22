@@ -1,0 +1,37 @@
+.bgHelp {
+  background-color: #f94706;
+}
+.help {
+  height: 32px;
+}
+.fz {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.6rem;
+  font-family: inherit;
+}
+.bg {
+  background-color:#f94706;
+}
+.sizeLogo {
+  height: 64px;
+}
+.sizeAbout {
+  height: 48px;
+}
+.logOut {
+  justify-content: space-between !important;
+}
+.modall {
+  /* position: fixed;
+  top: 60px;
+  z-index: 1055;
+  display: none;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0; */
+  left: auto !important ;
+  top: 60px !important;
+  width: 300px !important;
+}
