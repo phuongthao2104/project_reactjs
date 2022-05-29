@@ -3112,6 +3112,11 @@ cliui@^7.0.2:
     strip-ansi "^6.0.0"
     wrap-ansi "^7.0.0"
 
+clsx@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
+  integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
+
 co@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
@@ -7357,10 +7362,10 @@ react-error-overlay@^6.0.11:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.11.tgz#92835de5841c5cf08ba00ddd2d677b6d17ff9adb"
   integrity sha512-/6UZ2qgEyH2aqzYZgQPxEnz33NJ2gNsnHA2o5+o4wW9bLM/JYQitNP9xPhsXwC08hMMovfGe/8retsdDsczPRg==
 
-react-hook-form@^7.31.1:
-  version "7.31.1"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.31.1.tgz#16c357dd366bc226172e6acbb5a1672873bbfb28"
-  integrity sha512-QjtjZ8r8KtEBWWpcXLyQordCraTFxILtyQpaz5KLLxN2YzcC+FZ9LLtOnNGuOnzZo9gCoB+viK3ZHV9Mb2htmQ==
+react-hook-form@^7.31.2:
+  version "7.31.2"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.31.2.tgz#efb7ac469810954488b7cf40be4e5017122c6e5e"
+  integrity sha512-oPudn3YuyzWg//IsT9z2cMEjWocAgHWX/bmueDT8cmsYQnGY5h7/njjvMDfLVv3mbdhYBjslTRnII2MIT7eNCA==
 
 react-icons@^4.3.1:
   version "4.3.1"
@@ -7467,6 +7472,13 @@ react-scripts@5.0.1:
   optionalDependencies:
     fsevents "^2.3.2"
 
+react-toastify@^9.0.1:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-9.0.1.tgz#2f3abd26a75efd55a82cb9c0a897c865218ea420"
+  integrity sha512-c2zeZHkCX+WXuItS/JRqQ/8CH8Qm/je+M0rt09xe9fnu5YPJigtNOdD8zX4fwLA093V2am3abkGfOowwpkrwOQ==
+  dependencies:
+    clsx "^1.1.1"
+
 react-transition-group@^4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.2.tgz#8b59a56f09ced7b55cbd53c36768b922890d5470"
@@ -7476,6 +7488,11 @@ react-transition-group@^4.4.2:
     dom-helpers "^5.0.1"
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
+
+react-use-cart@1.5:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/react-use-cart/-/react-use-cart-1.5.0.tgz#34dfe9cf580ab74069607f6428f6d57087124ce5"
+  integrity sha512-WPLK3LtRirOpAIgfB/rgGpmpMEhZoDbgWQY7skVbwaMAwp1GdGAvZec1hq5kZdytTtx6JKdwfZzFrOXG/ncEkA==
 
 react@^18.1.0:
   version "18.1.0"

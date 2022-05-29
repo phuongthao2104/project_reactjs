@@ -35,3 +35,28 @@
   top: 60px !important;
   width: 300px !important;
 }
+.logOut {
+  justify-content: space-between !important;
+}
+.modall {
+  left: auto !important ;
+  top: 60px !important;
+  width: 300px !important;
+}
+.cart {
+  position: relative;
+}
+.numberCart {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  margin: auto;
+  left: 15px;
+  top: -2px;
+  z-index: 999;
+  background-color: #fff;
+  color: #f94706;
+  font-weight: bold;
+  border-radius: 100%;
+  font-size: 12px;
+}

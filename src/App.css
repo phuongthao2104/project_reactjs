@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+.card-body {
+  height: 110px;
+}
+.card-text {
+  height: 46px !important;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

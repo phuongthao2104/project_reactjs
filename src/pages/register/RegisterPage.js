@@ -1,144 +1,144 @@
-import React, { useState } from "react";
-import ReactLoading from "react-loading";
-import { Link, useNavigate } from "react-router-dom";
-import LoginForm from "../../features/login/LoginForm";
-import serviceCallApi from "../../services/ServiceApi";
+// import React, { useEffect, useState } from "react";
+import styles from "../login/Login.module.css";
+import { Container, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+const axios = require("axios").default;
 
-const RegisterPage = () => {
-  const [loading, setLoading] = useState(false);
+const Registration = () => {
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
-    watch,
+
     formState: { errors },
   } = useForm();
-  const onSubmit = async (data) => {
-    setLoading(true);
+
+  const postApi = async (data) => {
     try {
-      await serviceCallApi("register", "POST", data);
-      setLoading(false);
+      await axios({
+        method: "POST",
+        url: "http://khanh.tokyo/api/register",
+        data,
+      });
       navigate("/login");
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
+    } catch (errors) {
+      console.log("loi");
     }
   };
+  const onSubmit = (data) => {
+    postApi(data);
+  };
+
   return (
-    <section className="h-100">
-      <div className="container h-100">
-        <div className="row justify-content-sm-center h-100">
-          <div className="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
-            <div className="card shadow-lg">
-              <div className="card-body p-5">
-                <h1 className="fs-4 card-title fw-bold mb-4">Register</h1>
-                {loading ? (
-                  <div className="text-center d-flex justify-content-center">
-                    <ReactLoading
-                      type="spin"
-                      color="blue"
-                      height={"20%"}
-                      width={"20%"}
-                    />
-                  </div>
-                ) : (
-                  <form
-                    onSubmit={handleSubmit(onSubmit)}
-                    className="needs-validation"
-                  >
-                    <div className="mb-3">
-                      <label className="mb-2 text-muted" htmlFor="name">
-                        Name
-                      </label>
-                      <input
-                        id="name"
-                        type="text"
-                        className="form-control"
-                        {...register("name", { required: true })}
-                        required
-                      />
-                      <div className="text-danger">
-                        {errors.name && <span>Name field is required</span>}
-                      </div>
-                    </div>
-                    <div className="mb-3">
-                      <label className="mb-2 text-muted" htmlFor="email">
-                        E-Mail Address
-                      </label>
-                      <input
-                        id="email"
-                        type="email"
-                        className="form-control"
-                        {...register("email", { required: true })}
-                        required
-                      />
-                      <div className="text-danger">
-                        {errors.name && <span>Email field is required</span>}
-                      </div>
-                    </div>
-                    <div className="mb-3">
-                      <label className="mb-2 text-muted" htmlFor="password">
-                        Password
-                      </label>
-                      <input
-                        id="password"
-                        type="password"
-                        className="form-control"
-                        {...register("password", { required: true })}
-                        required
-                      />
-                      <div className="text-danger">
-                        {errors.password && (
-                          <span>Password field is required</span>
-                        )}
-                      </div>
-                    </div>
-                    <div className="mb-3">
-                      <label className="mb-2 text-muted" htmlFor="password">
-                        Confirm Password
-                      </label>
-                      <input
-                        id="password"
-                        type="password"
-                        className="form-control"
-                        {...register("c_password", { required: true })}
-                        required
-                      />
-                      <div className="text-danger">
-                        {errors.c_password && (
-                          <span>Confirm password field is required</span>
-                        )}
-                      </div>
-                    </div>
-                    <p className="form-text text-muted mb-3">
-                      By registering you agree with our terms and condition.
-                    </p>
-                    <div className="align-items-center d-flex">
-                      <button type="submit" className="btn btn-primary ms-auto">
-                        Register
-                      </button>
-                    </div>
-                  </form>
-                )}
-              </div>
-              <div className="card-footer py-3 border-0">
-                <div className="text-center">
-                  Already have an account?{" "}
-                  <Link to="/login" className="text-dark">
-                    Login
-                  </Link>
+    <Container fluid>
+      <Row className={styles.height}>
+        <Col lg="4">
+          <div
+            className={`d-flex flex-column  justify-content-center align-content-center ${styles.Login}`}
+          >
+            <h1 className="text-center mb-5">Registration</h1>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="mb-3">
+                <label htmlFor="name" className="form-label">
+                  Name
+                </label>
+                <input
+                  defaultValue=""
+                  type="text"
+                  className="form-control"
+                  id="name"
+                  aria-describedby="emailHelp"
+                  {...register("name", { required: true })}
+                />
+                <div id="name" className="form-text">
+                  {errors.name && (
+                    <p className="text-danger">Bạn phải nhập Name</p>
+                  )}
                 </div>
               </div>
-            </div>
-            <div className="text-center mt-5 text-muted">
-              Copyright ©  Your Company
-            </div>
+              <div className="mb-3">
+                <label htmlFor="email" className="form-label">
+                  Email address
+                </label>
+                <input
+                  defaultValue=""
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  aria-describedby="emailHelp"
+                  {...register("email", { required: true })}
+                />
+                <div id="email" className="form-text">
+                  {errors.email && (
+                    <p className="text-danger">Bạn phải nhập email</p>
+                  )}
+                </div>
+              </div>
+              <div className="mb-3">
+                <label htmlFor="password" className="form-label">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  {...register("password", { required: true })}
+                />
+                <div id="password" className="form-text">
+                  {errors.password && (
+                    <p className="text-danger">Bạn phải nhập password</p>
+                  )}
+                </div>
+              </div>
+              <div className="mb-3">
+                <label htmlFor="c_password" className="form-label">
+                  Confirm Password
+                </label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="c_password"
+                  {...register("c_password", { required: true })}
+                />
+                <div id="c_password" className="form-text">
+                  {errors.c_password && (
+                    <p className="text-danger">
+                      Bạn phải nhập Confirm password
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="">
+                <button type="submit" className="btn btn-primary  w-100 ">
+                  Đăng Ký
+                </button>
+              </div>
+              {/* <Link
+                to=""
+                type="submit"
+                className="text-white text-decoration-none btn btn-primary mt-4 w-100"
+                onClick={handlRegister}
+              >
+                Đăng Ký
+              </Link> */}
+            </form>
           </div>
-        </div>
-      </div>
-    </section>
+        </Col>
+        <Col lg="8">
+          <div className="d-none d-lg-block">
+            <img
+              src="../bg-01.jpg"
+              alt=""
+              className={`${styles.imgLeft} w-100`}
+            />
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
-export default RegisterPage;
+export default Registration;

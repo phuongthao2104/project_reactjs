@@ -10,7 +10,8 @@ import Footer from "../../components/Footer/Footer";
 const axios = require("axios").default;
 
 const pages = [1, 2, 3];
-const HomePage = () => {
+
+const HomePage = () => {  
   const [product, setProduct] = useState([]);
   const [page, setPage] = useState(1);
   useEffect(() => {
@@ -45,22 +46,37 @@ const HomePage = () => {
 
   useEffect(() => {
     axios
-      .get(`http://khanh.tokyo/api/products?page=${page}`)
+      .get(`http://khanh.tokyo/api/products?page=${page}&limit=18&id=2`)
       .then(function (response) {
         setProduct(response.data.data.data);
 
         console.log(response.data.data.data);
-      })
+      })  
       .catch(function (error) {
+        // handle error
         console.log(error);
       });
   }, [page]);
-
-
+  
+  // console.log(product);
   return (
     <div>
       <Header />
       <Container>
+      <Row>
+          <Col>
+            <div className={`fixed-bottom mb-5 ${styles.widthOntop}`}>
+              <button
+                onClick={onTop}
+                className="border-0 fs-3 shadow  mb-3 ms-3 pb-2 px-2 bg-body rounded text-danger d-none"
+                id="onTheTop"
+              >
+                {" "}
+                <BsArrowUpSquare />
+              </button>
+            </div>
+          </Col>
+        </Row>
         <Row>
           <Col>
           <div className="carousel-inner mt-2 ">
@@ -71,7 +87,7 @@ const HomePage = () => {
         </div>
             <div className="d-none d-md-block">
               <ul className="list-unstyled py-4 d-flex justify-content-between ">
-                <li className="d-flex flex-column align-items-center justify-content-start">
+              <li className="d-flex flex-column align-items-center justify-content-start">
                   <img
                     src="https://cf.shopee.vn/file/b3535d7e56c58c4ebe9a87672d38cc5e_xhdpi"
                     alt=""
@@ -167,17 +183,8 @@ const HomePage = () => {
                 </li>
               </ul>
             </div>
-            
           </Col>
         </Row>
-
-        {/* <Container>
-        <Row>
-            <Col lg="12" className="">
-              
-            </Col>
-        </Row>
-        </Container> */}
       </Container>
 
       <Container fluid className={`${styles.bgSP}`}>
@@ -185,29 +192,29 @@ const HomePage = () => {
           <Row>
             <Col lg="12" className="">
               <div className={`${styles.cardProduct}`}>
-                {product.map((e, i) => {
+                {product.map((product, i) => {
                   return (
                     <Link
-                      to=""
-                      className={`card ${styles.cardSize} shadow text-decoration-none text-black mt-3 rounded  mx-2`}
+                      to={`product/${product.id}/${product.slug}`}
+                      className={`card ${styles.cardSize} shadow text-decoration-none text-black mt-4 rounded  mx-2`}
                       key={i}
                     >
                       <img
-                        src={e.avatar}
+                        src={product.avatar}
                         className={`${styles.cardImg}`}
                         alt="..."
                       />
-                      <div className="card-body p-2">
+                      <div className={`card-body p-2`}>
                         <p
                           className={`card-text ${styles.fzCardText} mt-1 mb-2`}
                         >
-                          {e.name}
+                          {product.name}
                         </p>
-                        <h5 className="card-title">{e.price}</h5>
+                        <h6 className="card-title">{product.price}</h6>
                       </div>
                       <div className="d-flex justify-content-between p-1">
-                        <span>TP.HCM</span>
-                        <span>đã bán 2</span>
+                        <span>Hà Nội</span>
+                        <span>Đã bán 100</span>
                       </div>
                     </Link>
                   );
@@ -217,14 +224,20 @@ const HomePage = () => {
           </Row>
           <Row>
             <Col>
-              <div className={`d-flex justify-content-center mt-4 mb-2`}>   
-
+              <div className={`d-flex justify-content-center mt-5 mb-3`}>
+                {pages.map((e, i) => {
+                  return (
                     <button
-                      className="border-0 shadow  mb-4 ms-4 pb-2 px-2 bg-body rounded mx-4"           
-                      onClick={() => { }}>
-                      Xem thêm
+                      className="border-0 shadow  mb-3 ms-3 pb-2 px-2 bg-body rounded mx-3"
+                      key={i}
+                      onClick={() => {
+                        handleNextPage(i);
+                      }}
+                    >
+                      {e}
                     </button>
-
+                  );
+                })}
               </div>
             </Col>
           </Row>
